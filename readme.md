@@ -15,7 +15,7 @@ A sanity plugin which allows you to duplicate items in an array type (with some 
 - This plugin is useless on arrays of References, as you might as well just look up the reference yourself. In this instance, the plugin will return an empty array of duplication options, and so the 'duplicate' button won't actually be rendered.
 - Where a mixed array exists, and it includes Reference type, the reference options will not show up in the duplicate drop-down. You might like to advise of this in the 'description' field on the array input schema.
 
-![Example][example.png]
+![Example](example.png)
 
 ### Example
 In the example below, `options` has been included on our array schema, with the `canDuplicate` key. It's value is one of the following:
