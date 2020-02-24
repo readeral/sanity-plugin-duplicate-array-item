@@ -21,11 +21,15 @@ export default function DuplicateArrayFunctions(props) {
 
     // If canDuplicate is set to boolean 'true' and item is a string, return string
     if (typeof field !== 'string' && field === true) {
-      return value.map(item => ({title: item, item}));
+      if (typeof item === 'string' || typeof item === 'number') {
+        return value.map(item => ({title: item, item}));
+      }
     }
 
     return value
+      // Filter out references
       .filter(item => !item._type)
+      // Map remaining items
       .map(item => {
         // If canDuplicate passes a value which doesn't correspond to a field, try alternatives:
         if (item[field] === undefined) {
