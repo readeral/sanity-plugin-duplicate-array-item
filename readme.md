@@ -1,6 +1,6 @@
 # Sanity array duplicate item plugin
 
-A sanity plugin which allows you to duplicate items in an array type (with some caveats)
+A sanity plugin which allows you to duplicate items in an array type (with some caveats).
 
 ## Install
 
@@ -10,6 +10,10 @@ A sanity plugin which allows you to duplicate items in an array type (with some 
 - Ensure `duplicate-array-item` has been appended to the `plugins` array in the `sanity.json` file of your Studio
 
 ## How to add a duplicate button to your array field
+
+The approach to adding a 'duplicate' button is opt-in via input options. That is, by default, you won't see any change to your array inputs when you first install this package.
+
+It's also per array input, rather than global - this allows you to implement the 'duplicate' button only on arrays for which it makes sense, or for which you are happy for your studio users to be able to duplicate.
 
 ### Caveats
 - This plugin is useless on arrays of References, as you might as well just look up the reference yourself. In this instance, the plugin will return an empty array of duplication options, and so the 'duplicate' button won't actually be rendered.
