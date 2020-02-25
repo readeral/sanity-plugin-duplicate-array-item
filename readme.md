@@ -65,3 +65,9 @@ In this instance, the value of our dropdown duplicate options is the field 'text
 ```
 
 If the field cannot be found, then the plugin will attempt to resolve the items either as a string, or searching common key values such as 'title', 'name', and 'text'. If it still can't be resolved, an error will be output to the console advising that the field to be looked up has been set incorrectly.
+
+### Changelog
+v1.1 - added more common field names, added console warnings, mixed array values return only items with field name defined on the object (a.k.a fixed a bug that caused the whole thing to fall over)
+
+### Future plans
+- Accept an array of values on canDuplicate to manage multiple types on an array with mutiple different title fields.
