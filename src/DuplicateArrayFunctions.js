@@ -14,57 +14,56 @@ export default function DuplicateArrayFunctions(props) {
   };
 
   const items = field => {
+    if (Array.isArray(field)) {
+      console.log(" You've passed an array in to the duplicate function! These aren't supported yet")
+      return []
+    }
+
     // If there is no canDuplicate value, or there are no array items, return empty array
     if (field === undefined || value === undefined) {
       return [];
     }
 
-    // If canDuplicate is set to boolean 'true' and item is a string, return string
-    if (typeof field !== 'string' && field === true) {
-      if (typeof item === 'string' || typeof item === 'number') {
-        return value.map(item => ({title: item, item}));
-      }
-    }
-
     return value
       // Filter out references
-      .filter(item => !item._type)
+      .filter(item => item._type !== 'reference')
       // Map remaining items
-      .map(item => {
+      .reduce((array, item) => {
         // If canDuplicate passes a value which doesn't correspond to a field, try alternatives:
         if (item[field] === undefined) {
           // Test to see if item can be rendered as is
           if (typeof item === 'string' || typeof item === 'number') {
-            return {
+            array.push({
               title: item,
               item
-            };
+            })
           }
 
           // Test for common fields instead
-          if (item.name || item.title || item.text) {
-            return {
-              title: item.name || item.title || item.text,
+          if (item.name || item.title || item.text || item.header || item.id || item.current || item.description) {
+            array.push({
+              title: item.name || item.title || item.text || item.header || item.id || item.current || item.description,
               item
-            };
-          }
-
-          // Otherwise return nothing
-          console.log(
-            'The array duplication button cannot find your field to render children. Please check your schema.'
-          );
-          return [];
+            });
+          } else {
+            // Otherwise push nothing
+            console.log(
+              'The array duplication function cannot find your field to render children. Please check your schema.'
+            );
+          }          
+          return array;
         }
 
-        return {
+        array.push({
           title: item[field],
           item
-        };
-      });
+        });
+
+        return array;
+      }, []);
   };
 
   const itemArray = items(type?.options?.canDuplicate);
-
   return (
     <DefaultArrayFunctions {...props}>
       {itemArray.length > 0 && (
